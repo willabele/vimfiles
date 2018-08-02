@@ -1,5 +1,14 @@
 " Much of this is stolen from github.com/drmikehenry/vimfiles
 
+" Brackets are randomly highlighted for reasons I don't understand
+augroup coloroverride
+    autocmd!
+    autocmd ColorScheme * highlight cErrInParen cterm=NONE
+    autocmd ColorScheme * highlight ColorColumn ctermbg=16
+augroup END
+autocmd BufWinEnter * highlight cErrInParen cterm=NONE
+autocmd BufWinEnter * highlight ColorColumn ctermbg=16
+
 call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-sensible'
@@ -70,8 +79,6 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
             \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Brackets are randomly highlighted for reasons I don't understand
-highlight cErrInParen cterm=NONE
 
 " -------------------------------------------------------------
 " bufmru
