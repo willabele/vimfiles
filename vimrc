@@ -1,6 +1,7 @@
 " Much of this is stolen from github.com/drmikehenry/vimfiles
 
 call plug#begin('~/.vim/plugged')
+Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-sensible'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
@@ -20,6 +21,28 @@ if v:version >= 800
     call deoplete#enable()
 elseif has('lua')
 
+    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
+
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
     " Plugin key-mappings.
     inoremap <expr><C-g>     neocomplete#undo_completion()
     inoremap <expr><C-l>     neocomplete#complete_common_string()
@@ -40,8 +63,51 @@ elseif has('lua')
     inoremap <expr><C-y>  neocomplete#close_popup()
     inoremap <expr><C-e>  neocomplete#cancel_popup()
 endif
+
 let mapleader = ','
 
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Brackets are randomly highlighted for reasons I don't understand
+highlight cErrInParen cterm=NONE
+
+" -------------------------------------------------------------
+" bufmru
+" -------------------------------------------------------------
+
+" Set key to enter BufMRU mode (override this in vimrc-before.vim).
+if !exists("g:bufmru_switchkey")
+    " NOTE: <C-^> (CTRL-^) also works without shift (just pressing CTRL-6).
+    let g:bufmru_switchkey = "<C-^>"
+endif
+
+" Use <Space><Space> as an additional map for BufMRU mode, aiming to be
+" closer to the original muscle memory of pressing a single <Space>.
+exec "nmap <Space><Space> " . g:bufmru_switchkey
+
+" Set to 1 to pre-load the number marks into buffers.
+" Set to 0 to avoid this pre-loading.
+let g:bufmru_nummarks = 0
+
+function! BufmruUnmap()
+    " Remove undesirable mappings, keeping the bare minimum for fast buffer
+    " switching without needing the press <Enter> to exit bufmru "mode".
+    nunmap <Plug>bufmru....e
+    nunmap <Plug>bufmru....!
+    nunmap <Plug>bufmru....<Esc>
+    nunmap <Plug>bufmru....y
+endfunction
+
+augroup local_bufmru
+    autocmd!
+    autocmd VimEnter * call BufmruUnmap()
+augroup END
+
+set textwidth=80
+set colorcolumn=+0
+set hlsearch
 " -------------------------------------------------------------
 " CtrlP
 " -------------------------------------------------------------
@@ -456,9 +522,6 @@ set expandtab
 highlight LongLine ctermbg=DarkYellow guibg=DarkYellow
 highlight WhitespaceEOL ctermbg=DarkYellow guibg=DarkYellow
 if v:version >= 702
-  " Lines longer than 80 columns.
-  au BufWinEnter * let w:m0=matchadd('LongLine', '\%>80v.\+', -1)
-
   " Whitespace at the end of a line. This little dance suppresses
   " whitespace that has just been typed.
   au BufWinEnter * let w:m1=matchadd('WhitespaceEOL', '\s\+$', -1)
