@@ -3,10 +3,8 @@
 " Brackets are randomly highlighted for reasons I don't understand
 augroup coloroverride
     autocmd!
-    autocmd ColorScheme * highlight cErrInParen cterm=NONE
     autocmd ColorScheme * highlight ColorColumn ctermbg=16
 augroup END
-autocmd BufWinEnter * highlight cErrInParen cterm=NONE
 autocmd BufWinEnter * highlight ColorColumn ctermbg=16
 
 call plug#begin('~/.vim/plugged')
