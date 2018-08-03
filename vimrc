@@ -14,6 +14,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'drmikehenry/vim-fixkey'
 if v:version >= 800
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
