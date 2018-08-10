@@ -302,7 +302,7 @@ set guifont=Source\ Code\ Pro\ Light
 "command! -bar SetupC call CustomSetupC()
 
 " Replace trailing spaces with a dot and tabs with an arrow
-set listchars=trail:·,precedes:«,extends:»,tab:▸\
+set listchars=trail:·,precedes:«,tab:▸\ ,extends:»
 set list
 
 
