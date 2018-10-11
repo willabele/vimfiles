@@ -15,6 +15,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'drmikehenry/vim-fixkey'
+Plug 'tpope/vim-fugitive'
 if v:version >= 800
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
