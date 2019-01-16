@@ -10,12 +10,15 @@ autocmd BufWinEnter * highlight ColorColumn ctermbg=16
 call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
 Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'drmikehenry/vim-fixkey'
-Plug 'tpope/vim-fugitive'
+Plug 'rust-lang/rust.vim'
+Plug 'majutsushi/tagbar'
 if v:version >= 800
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
