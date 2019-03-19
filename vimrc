@@ -16,16 +16,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'drmikehenry/vim-fixkey'
 Plug 'rust-lang/rust.vim'
 Plug 'majutsushi/tagbar'
-if v:version >= 800
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-else
-    Plug 'Shougo/neocomplete'
-endif
+Plug 'Shougo/deoplete.nvim'
 call plug#end()
 
 if v:version >= 800
