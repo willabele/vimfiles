@@ -19,6 +19,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/deoplete.nvim'
+Plug 'kergoth/vim-bitbake'
 call plug#end()
 
 if v:version >= 800
