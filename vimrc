@@ -560,4 +560,11 @@ autocmd FileType make set noexpandtab
 " Delete trailing whitespace and tabs at the end of each line
 command! DeleteTrailingWs :%s/\s\+$//
 
+function! CommitNotes()
+    if (expand("%:p") =~# "/home/will/projects/notes/")
+        execute '! cd /home/will/projects/notes && git ci -a -m "%"'
+        execute '! cd /home/will/projects/notes && ping -c 1 $(git remote get-url origin| sed -e "s/.*@\(.*\):.*/\1/g") >/dev/null && git push'
+    endif
+endfunction
 
+:autocmd BufWritePost * call CommitNotes()
